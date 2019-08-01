@@ -81,7 +81,7 @@ namespace media_functions_for_logic_app
                 var channels= new System.Collections.Generic.List <String>();
                 _context.Channels.ToList().ForEach(e=>channels.Add("{\"ChannelName\":"+e.Name+"\",\"State\":\""+e.State.ToString()+"\"}"));
                 log.Info("Channels: "+String.Join(", ", channels.ToArray()));
-
+                channels.Clear();
 
                 if (channelName != null)
                 {
