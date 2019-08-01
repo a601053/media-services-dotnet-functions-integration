@@ -6,13 +6,13 @@ This function stops a channel.
 
 Input:
 {
-    "channelName" : "the name of the existing channel",
+    "channelName" : (optional)"the name of the existing channel, EX:c06lpvmix02",
 }
 
 Output:
 {
     "success" : true,
-    "channels" : "{"ChannelName":"c06lpvmix01","State":"Stopped"}"
+    "channels" : [{"ChannelName":"c06lpvmix01","State":"Running"}, {"ChannelName":c06lpvmix02","State":"Stopped"}]
 }
 
 */
