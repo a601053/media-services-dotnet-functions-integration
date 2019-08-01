@@ -12,8 +12,7 @@ Input:
 Output:
 {
     "success" : true,
-    "state" : "Stopped",
-    "assetId" : "the asset id of the asset"
+    "channelStatus" : "Stopped"
 }
 
 */
@@ -101,7 +100,7 @@ namespace media_functions_for_logic_app
                 log.Info($"ERROR: Exception {message}");
                 return req.CreateResponse(HttpStatusCode.InternalServerError, new { error = message });
             }
-
+            log.Info("Channel Status: "+channelStatus);
             return req.CreateResponse(HttpStatusCode.OK, new
             {
                 success = true,
