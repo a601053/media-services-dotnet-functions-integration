@@ -72,7 +72,7 @@ namespace media_functions_for_logic_app
                 
                 log.Info("Context object created.");
 
-                var channels=_context.Channels.Select(o => o.ToString()).ToArray();
+                var channels=_context.Channels.Select(o => o.Name).ToArray();
                 log.Info("Channels: "+channels);
 
 
