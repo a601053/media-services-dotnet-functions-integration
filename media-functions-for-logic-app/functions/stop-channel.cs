@@ -40,7 +40,9 @@ namespace media_functions_for_logic_app
 
         {
             log.Info($"Webhook was triggered!");
-
+            string channelStatus = null;
+            string channelName = null;
+            try{
             string jsonContent = await req.Content.ReadAsStringAsync();
             dynamic data = JsonConvert.DeserializeObject(jsonContent);
 
@@ -54,8 +56,11 @@ namespace media_functions_for_logic_app
                 });
             }
             
-            string channelName = data.channelName;
-            string channelStatus = null;
+            channelName = data.channelName;
+            }catch (Exception )
+            {
+
+            }
 
             MediaServicesCredentials amsCredentials = new MediaServicesCredentials();
             log.Info($"Using Azure Media Service Rest API Endpoint : {amsCredentials.AmsRestApiEndpoint}");
@@ -90,6 +95,7 @@ namespace media_functions_for_logic_app
                     }
                     channel.Stop();
                     channelStatus = channel.State.ToString();
+                    log.Info("Channel "+channelName+" is non state: "+channel.State.ToString());
                 }
                 else {
                     log.Info("All channels are stoped");
