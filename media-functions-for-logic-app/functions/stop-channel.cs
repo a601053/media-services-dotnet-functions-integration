@@ -43,6 +43,7 @@ namespace media_functions_for_logic_app
             string channelStatus = null;
             string channelName = null;
             try{
+
             string jsonContent = await req.Content.ReadAsStringAsync();
             dynamic data = JsonConvert.DeserializeObject(jsonContent);
 
@@ -84,8 +85,7 @@ namespace media_functions_for_logic_app
 
                 if (channelName != null)
                 {
-                    var channel = _context.Channels.Where(c => c.Name.ToString().Equals(channelName)).FirstOrDefault();
-                    log.Info("channelName: "+channel.Name);
+                    var channel = _context.Channels.Where(c => c.Name == channelName).FirstOrDefault();
                     if (channel == null)
                     {
                         return req.CreateResponse(HttpStatusCode.BadRequest, new
