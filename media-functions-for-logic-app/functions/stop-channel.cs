@@ -84,7 +84,7 @@ namespace media_functions_for_logic_app
 
                 if (channelName != null)
                 {
-                    var channel = _context.Channels.Where(c => c.Name.Equals(channelName)).FirstOrDefault();
+                    var channel = _context.Channels.Where(c => c.Name.ToString().Equals(channelName)).FirstOrDefault();
                     log.Info("channelName: "+channel.Name);
                     if (channel == null)
                     {
@@ -99,7 +99,7 @@ namespace media_functions_for_logic_app
                     log.Info("Channel "+channelName+" is non state: "+channel.State.ToString());
                 }
                 else {
-                    log.Info("All channels are stoped");
+                    log.Info("All channels are stopped");
                     _context.Channels.AsParallel().ForAll(e => e.Stop());
                     channelStatus = _context.Channels.ToList().ToArray().ToString();
                 }
