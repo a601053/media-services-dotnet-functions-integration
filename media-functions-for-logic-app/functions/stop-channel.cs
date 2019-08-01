@@ -84,8 +84,8 @@ namespace media_functions_for_logic_app
 
                 if (channelName != null)
                 {
-                    log.Info("channelName: "+channelName);
-                    var channel = _context.Channels.Where(c => c.Name == channelName).FirstOrDefault();
+                    var channel = _context.Channels.Where(c => c.Name.Equals(channelName)).FirstOrDefault();
+                    log.Info("channelName: "+channel.Name);
                     if (channel == null)
                     {
                         return req.CreateResponse(HttpStatusCode.BadRequest, new
