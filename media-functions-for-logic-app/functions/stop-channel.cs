@@ -84,6 +84,7 @@ namespace media_functions_for_logic_app
 
                 if (channelName != null)
                 {
+                    log.Info("channelName: "+channelName);
                     var channel = _context.Channels.Where(c => c.Name == channelName).FirstOrDefault();
                     if (channel == null)
                     {
