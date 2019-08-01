@@ -69,10 +69,13 @@ namespace media_functions_for_logic_app
                 AzureAdTokenProvider tokenProvider = new AzureAdTokenProvider(tokenCredentials);
 
                 _context = new CloudMediaContext(amsCredentials.AmsRestApiEndpoint, tokenProvider);
-
+                
                 log.Info("Context object created.");
 
-                log.Info("Channels: "+_context.Channels.ToList().ToArray().ToString());
+                var channels=_context.Channels.Select(o => o.ToString()).ToArray();
+                log.Info("Channels: "+channels);
+
+
                 if (channelName != null)
                 {
                     var channel = _context.Channels.Where(c => c.Name == channelName).FirstOrDefault();
