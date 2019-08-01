@@ -79,7 +79,7 @@ namespace media_functions_for_logic_app
                 log.Info("Context object created.");
 
                 var channels= new System.Collections.Generic.List <String>();
-                _context.Channels.ToList().ForEach(e=>channels.Add(e.Name));
+                _context.Channels.ToList().ForEach(e=>channels.Add("{\"ChannelName\":"+e.Name+"\",\"State\":\""+e.State.ToString()+"\"}"));
                 log.Info("Channels: "+String.Join(", ", channels.ToArray()));
 
 
@@ -94,15 +94,17 @@ namespace media_functions_for_logic_app
                         });
 
                     }
+                    
                     channel.Stop();
-                    channelStatus = channel.State.ToString();
                     log.Info("Channel "+channelName+" is non state: "+channel.State.ToString());
                 }
                 else {
                     log.Info("All channels are stopped");
                     _context.Channels.AsParallel().ForAll(e => e.Stop());
-                    channelStatus = _context.Channels.ToList().ToArray().ToString();
                 }
+                    _context.Channels.ToList().ForEach(e=>channels.Add("{\"ChannelName\":"+e.Name+"\",\"State\":\""+e.State.ToString()+"\"}")); 
+                    channelStatus="["+String.Join(", ", channels.ToArray())+"]";
+                    log.Info("Channels: "+channelStatus);
               
                 
                 
@@ -117,7 +119,7 @@ namespace media_functions_for_logic_app
             return req.CreateResponse(HttpStatusCode.OK, new
             {
                 success = true,
-                channelStatus= channelStatus
+                channels= channelStatus
             });
         }
     }
