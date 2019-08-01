@@ -94,13 +94,12 @@ namespace media_functions_for_logic_app
                         });
 
                     }
-                    
-                    channel.Stop();
+                    try{channel.Stop();}catch(Exception){}
                     log.Info("Channel "+channelName+" is non state: "+channel.State.ToString());
                 }
                 else {
                     log.Info("All channels are stopped");
-                    _context.Channels.AsParallel().ForAll(e => e.Stop());
+                    _context.Channels.AsParallel().ForAll(e => {try{e.Stop();}catch(Exception){}});
                 }
                     _context.Channels.ToList().ForEach(e=>channels.Add("{\"ChannelName\":"+e.Name+"\",\"State\":\""+e.State.ToString()+"\"}")); 
                     channelStatus="["+String.Join(", ", channels.ToArray())+"]";
