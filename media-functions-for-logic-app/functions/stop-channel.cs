@@ -79,7 +79,7 @@ namespace media_functions_for_logic_app
                 log.Info("Context object created.");
 
                 var channels= new System.Collections.Generic.List <String>();
-                _context.Channels.ToList().ForEach(e=>channels.Add("{\"ChannelName\":\""+e.Name+"\",\"State\":\""+e.State.ToString()+"\"}"));
+                _context.Channels.ToList().ForEach(e=>channels.Add("{'ChannelName':'"+e.Name+"','State':'"+e.State.ToString()+"'}"));
                 log.Info("Channels: "+String.Join(", ", channels.ToArray()));
                 channels.Clear();
 
@@ -101,7 +101,7 @@ namespace media_functions_for_logic_app
                     log.Info("All channels are stopped");
                     _context.Channels.AsParallel().ForAll(e => {try{e.Stop();}catch(Exception){}});
                 }
-                    _context.Channels.ToList().ForEach(e=>channels.Add("{\"ChannelName\":\""+e.Name+"\",\"State\":\""+e.State.ToString()+"\"}")); 
+                    _context.Channels.ToList().ForEach(e=>channels.Add("{'ChannelName':'"+e.Name+"','State':'"+e.State.ToString()+"'}")); 
                     channelStatus="["+String.Join(", ", channels.ToArray())+"]";
                     log.Info("Channels: "+channelStatus);
               
