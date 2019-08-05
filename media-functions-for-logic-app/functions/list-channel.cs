@@ -30,6 +30,7 @@ using System.Linq;
 
 namespace media_functions_for_logic_app
 {
+    
     public static class list_channel
     {
         // Field for service context.
@@ -74,7 +75,7 @@ namespace media_functions_for_logic_app
             return req.CreateResponse(HttpStatusCode.OK, new
             {
                 success = true,
-                channels= channelStatus
+                channels= JsonConvert.DeserializeObject( channelStatus)
             });
         }
     }
