@@ -73,7 +73,7 @@ namespace media_functions_for_logic_app
 
                 var channels= new System.Collections.Generic.List <String>();
                 _context.Channels.ToList().ForEach(e=>channels.Add("{'ChannelName':'"+e.Name+"','State':'"+e.State.ToString()+"'}"));
-                log.Info("Channels: "+String.Join(", ", channels.ToArray()));
+                //log.Info("Channels: "+String.Join(", ", channels.ToArray()));
                 channels.Clear();
 
                 if (channelName != null)
@@ -107,7 +107,7 @@ namespace media_functions_for_logic_app
                 log.Info($"ERROR: Exception {message}");
                 return req.CreateResponse(HttpStatusCode.InternalServerError, new { error = message });
             }
-            log.Info("Channel Status: "+channelStatus);
+            //log.Info("Channel Status: "+channelStatus);
             return req.CreateResponse(HttpStatusCode.OK, new
             {
                 success = true,
