@@ -49,14 +49,7 @@ namespace media_functions_for_logic_app
 
             log.Info(jsonContent);
 
-            if (data.channelName == null)
-            {
-                return req.CreateResponse(HttpStatusCode.BadRequest, new
-                {
-                    error = "Please pass channelName in the input object"
-                });
-            }
-            
+           
             channelName = data.channelName;
             }catch (Exception )
             {
