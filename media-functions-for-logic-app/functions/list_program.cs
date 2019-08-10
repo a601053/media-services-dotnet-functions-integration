@@ -72,7 +72,7 @@ namespace media_functions_for_logic_app
                                                 +"'}")));
                 */
                 //_context.Channels.ToList().ForEach(e=> channelsStoped.Add("{'ChannelName':'"+e.Name+"','State':'"+e.State.ToString()+"'}")   );
-                _context.Channels.ToList().ForEach(e=> e.Programs.Where(p => p.Asset!=null && p.Asset.Locators!=null && p.Asset.Locators.Count>0).ToList().ForEach(p=> log.Info("{'ChannelName':'"+   p.Channel.Name+"','State':'--- : "+p.Channel.Name+" --- Locators: "+p.Asset.GetHlsUri().AbsoluteUri)  ));
+                _context.Channels.ToList().ForEach(e=> e.Programs.ToList().Where(p => p.Asset!=null && p.Asset.Locators!=null && p.Asset.Locators.Count>0).ToList().ForEach(p=> log.Info("{'ChannelName':'"+   p.Channel.Name+"','State':'--- : "+p.Channel.Name+" --- Locators: "+p.Asset.GetHlsUri().AbsoluteUri)  ));
                 
        
                 channelStatus="["+String.Join(", ", channelsStarted.ToArray())+"]";
