@@ -62,7 +62,7 @@ namespace media_functions_for_logic_app
                 var channelsStoped= new System.Collections.Generic.List <String>();
                 _context.Channels.ToList().ForEach(e=>channelsStarted.Add("{'ChannelName':'"+e.Name+"','State':'"+e.State.ToString()+"'}"));
                 //_context.Channels.ToList().ForEach(e=> channelsStoped.Add("{'ChannelName':'"+e.Name+"','State':'"+e.State.ToString()+"'}")   );
-                _context.Channels.ToList().ForEach(e=> e.Programs.ToList().ForEach(p=> log.Info("Channels: "+p.ChannelId+"   programa:"+p.Id+"      manifest:"+p.ManifestName))  );
+                _context.Channels.ToList().ForEach(e=> e.Programs.ToList().ForEach(p=> log.Info("Channels: "+p.Channel.Name+"   programa:"+p.Id+"      manifest:"+p.ManifestName))  );
                 
                 channelStatus="["+String.Join(", ", channelsStarted.ToArray())+"]";
                 //log.Info("Channels: "+channelStatus);
