@@ -62,7 +62,7 @@ namespace media_functions_for_logic_app
                 var channelsStoped= new System.Collections.Generic.List <String>();
                 _context.Channels.ToList().ForEach(e=>channelsStarted.Add("{'ChannelName':'"+e.Name+"','State':'"+e.State.ToString()+"'}"));
                 //_context.Channels.ToList().ForEach(e=> channelsStoped.Add("{'ChannelName':'"+e.Name+"','State':'"+e.State.ToString()+"'}")   );
-                _context.Channels.ToList().ForEach(e=> e.Programs.ToList().ForEach(p=> log.Info(getProgramData(p) ) ));
+                _context.Channels.ToList().ForEach(e=> e.Programs.ToList().ForEach(p=> log.Info("Channels: "+p.Channel.Name+"   Locators:"+p.Asset.GetHlsUri().AbsoluteUri)  ));
                 
                 
                 _context.Locators.ToList().ForEach(l=>log.Info("locator: "+l.Name+"   HlsUri:"+l.GetHlsUri().AbsoluteUri));
@@ -82,13 +82,6 @@ namespace media_functions_for_logic_app
                 success = true,
                 channels= JsonConvert.DeserializeObject( channelStatus)
             });
-        }
-
-        private static String getProgramData(IProgram p)
-        {
-            if(p.Asset.Locators.Count>0)
-                return ("Channels: "+p.Channel.Name+"   Locators:"+p.Asset?.Locators?.First().Id);
-                return "";
         }
     }
 }
