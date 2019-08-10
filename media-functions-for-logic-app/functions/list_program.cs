@@ -60,9 +60,19 @@ namespace media_functions_for_logic_app
 
                 var channelsStarted= new System.Collections.Generic.List <String>();
                 var channelsStoped= new System.Collections.Generic.List <String>();
-                _context.Channels.ToList().ForEach(e=> e.Programs.ToList().ForEach(p=>channelsStarted.Add("{'ChannelName':'"+   p.Channel.Name+"','ChannelState':'"+ p.Channel.State.ToString()+"','Program':'"+p.Name+"','ProgramState':'"+p.State.ToString()+"','Locators':'"+p.Asset.GetHlsUri().AbsoluteUri+"'}")));
+                _context.Channels.ToList().ForEach(e=>channelsStarted.Add("{'ChannelName':'"+e.Name+"','State':'"+e.State.ToString()+"'}"));
+                /* 
+                _context.Channels.ToList().ForEach(
+                    e=> e.Programs.ToList().ForEach(
+                        p=>channelsStarted.Add("{ 'ChannelName':'"+   p.Channel.Name
+                                                +"','ChannelState':'"+ p.Channel.State.ToString()
+                                                +"','Program':'"+p.Name
+                                                +"','ProgramState':'"+p.State.ToString()
+                                                +"','Locators':'"+p.Asset.GetHlsUri().AbsoluteUri
+                                                +"'}")));
+                */
                 //_context.Channels.ToList().ForEach(e=> channelsStoped.Add("{'ChannelName':'"+e.Name+"','State':'"+e.State.ToString()+"'}")   );
-                //_context.Channels.ToList().ForEach(e=> e.Programs.ToList().ForEach(p=> log.Info("{'ChannelName':'"+   p.Channel.Name+"','ChannelState':'"+ p.Channel.State.ToString()+"','Program':'"+p.Name+"','ProgramState':'"+p.State.ToString()+"','Locators':'"+p.Asset.GetHlsUri().AbsoluteUri+"'}")  ));
+                _context.Channels.ToList().ForEach(e=> e.Programs.ToList().ForEach(p=> log.Info("{'ChannelName':'"+   p.Channel.Name+"','State':'--- : "+p.Channel.Name+" --- Locators: "+p.Asset.GetHlsUri().AbsoluteUri)  ));
                 
        
                 channelStatus="["+String.Join(", ", channelsStarted.ToArray())+"]";
@@ -79,7 +89,7 @@ namespace media_functions_for_logic_app
             return req.CreateResponse(HttpStatusCode.OK, new
             {
                 success = true,
-                programs= JsonConvert.DeserializeObject( channelStatus)
+                channels= JsonConvert.DeserializeObject( channelStatus)
             });
         }
     }
