@@ -62,7 +62,8 @@ namespace media_functions_for_logic_app
                
                 _context.Channels.ToList().ForEach(e=> e.Programs.ToList().Where(p => p.Asset!=null && p.Asset.Locators!=null && p.Asset.Locators.Count>0).ToList().ForEach(p=>channelsStarted.Add("{ 'ChannelName':'"+   p.Channel.Name
                                                 +"','ChannelState':'"+ p.Channel.State.ToString()
-                                                
+                        //https://e01pro.akamaized.net/4fe76e8c-58f6-45b5-a0b6-6f8782c9639f/C03WBK20190824S1.ism/manifest(format=m3u8-aapl,filter=dvr2m)
+                        //http://lima2019wmsprodmediaserv-brso.streaming.media.azure.net/148afd3f-60b4-4fba-851c-f4f82c0ad395/C05SWM20190825S1.ism/manifest(format=m3u8-aapl)                      
                                                 +"','Locators':'"+p.Asset.GetHlsUri().AbsoluteUri
                                                 +"'}")));
                 
@@ -81,7 +82,8 @@ namespace media_functions_for_logic_app
             return req.CreateResponse(HttpStatusCode.OK, new
             {
                 success = true,
-                channels= JsonConvert.DeserializeObject( channelStatus)
+                channels= JsonConvert.DeserializeObject( channelStatus);
+                
             });
         }
     }
