@@ -82,7 +82,7 @@ namespace media_functions_for_logic_app
             return req.CreateResponse(HttpStatusCode.OK, new
             {
                 success = true,
-                channels= JsonConvert.DeserializeObject( channelStatus);
+                channels= JsonConvert.DeserializeObject( channelStatus)
                 
             });
         }
