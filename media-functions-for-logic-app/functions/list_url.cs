@@ -68,8 +68,8 @@ namespace media_functions_for_logic_app
                     
                     
                     
-                    log.Info("encoder: "+p.Asset.GetHlsUri().AbsoluteUri.Substring(101,2));
-                    log.Info("code: "+p.Asset.GetHlsUri().AbsoluteUri.Substring(63,53));
+                    //log.Info("encoder: "+p.Asset.GetHlsUri().AbsoluteUri.Substring(101,2));
+                    //log.Info("code: "+p.Asset.GetHlsUri().AbsoluteUri.Substring(63,53));
                     
                     channelsStarted.Add("{ 'ChannelName':'"+   p.Channel.Name
                                                 +"','ChannelState':'"+ p.Channel.State.ToString()
