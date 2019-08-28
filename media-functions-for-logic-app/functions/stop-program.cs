@@ -103,7 +103,11 @@ namespace media_functions_for_logic_app
                 }
 
                 log.Info("Stoping program...");
+                try{
                 program.Stop();
+                }catch{
+                    log.Error("Error al parar");
+                }
                 log.Info("Program stopped.");
                 assetId = program.AssetId;
                 
