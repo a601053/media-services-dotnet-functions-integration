@@ -81,8 +81,8 @@ namespace media_functions_for_logic_app
                     //  encoder     Int32.Parse(p.Asset.GetHlsUri().AbsoluteUri.Substring(101,2)  
                                                
                                                
-                                                +"','Locators':'"+"https://e0"+((Convert.ToInt32(p.Asset.GetHlsUri().AbsoluteUri.Substring(101,2))%3)+1)+"ipc.akamaized.net/"+p.Asset.GetHlsUri().AbsoluteUri.Substring(63,53)+".ism/manifest(format=m3u8-aapl,filter=backoff)"
-                                               //  +"','Locators':'"+"https://lima2019wmsprodmediaserv-brso.streaming.media.azure.net/"+p.Asset.GetHlsUri().AbsoluteUri.Substring(63,53)+".ism/manifest(format=m3u8-aapl,filter=dvr2m)"
+                                               // +"','Locators':'"+"https://e0"+((Convert.ToInt32(p.Asset.GetHlsUri().AbsoluteUri.Substring(101,2))%3)+1)+"ipc.akamaized.net/"+p.Asset.GetHlsUri().AbsoluteUri.Substring(63,53)+".ism/manifest(format=m3u8-aapl,filter=backoff)"
+                                                 +"','Locators':'"+"https://e04prod-lima2019wmsprodmediaserv-brso.streaming.media.azure.net/"+p.Asset.GetHlsUri().AbsoluteUri.Substring(63,53)+".ism/manifest(format=m3u8-aapl,filter=dvr2m)"
                                                 
                                                 
 
