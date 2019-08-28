@@ -103,10 +103,9 @@ namespace media_functions_for_logic_app
                 }
 
                 log.Info("Stoping program...");
-                try{
+                
+                if(program.State == ProgramState.Running){
                 program.Stop();
-                }catch{
-                    log.Error("Error al parar");
                 }
                 log.Info("Program stopped.");
                 assetId = program.AssetId;
