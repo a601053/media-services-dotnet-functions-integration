@@ -42,6 +42,7 @@ namespace media_functions_for_logic_app
         {
             log.Info($"Webhook was triggered!");
             string channelStatus = null;
+            string channelStatusL = null;
 
             MediaServicesCredentials amsCredentials = new MediaServicesCredentials();
             log.Info($"Using Azure Media Service Rest API Endpoint : {amsCredentials.AmsRestApiEndpoint}");
@@ -59,35 +60,26 @@ namespace media_functions_for_logic_app
                 log.Info("Context object created.");
 
                 var channelsStarted= new System.Collections.Generic.List <String>();
+                var channelsStartedL= new System.Collections.Generic.List <String>();
                
                 
 
-                _context.Channels.ToList().ForEach(e=> e.Programs.ToList().Where(p => p.Asset!=null && p.Asset.Locators!=null && p.Asset.Locators.Count>0).ToList().ForEach(p=>{
+                _context.Channels.ToList().ForEach(e=> e.Programs.ToList().Where(p => p.Asset!=null && p.Asset.Locators!=null && p.Asset.Locators.Count>0 ).ToList().ForEach(p=>{
                     
                     
-                    
-                    
+                  
+                    var valorChannel="{ 'ChannelName':'"+   p.Channel.Name
+                                                +"','ChannelState':'"+ p.Channel.State.ToString()
+                                                +"','Locators':'"+"https://e0"+((Convert.ToInt32(p.Asset.GetHlsUri().AbsoluteUri.Substring(101,2))%4)+1)+"prod-lima2019wmsprodmediaserv-brso.streaming.media.azure.net/"+p.Asset.GetHlsUri().AbsoluteUri.Substring(63,p.Asset.GetHlsUri().AbsoluteUri.LastIndexOf(".")-63)+".ism/manifest(format=m3u8-aapl,filter=dvr2m)"
+                                               //  +"','Locators':'"+"https://e04prod-lima2019wmsprodmediaserv-brso.streaming.media.azure.net/"+p.Asset.GetHlsUri().AbsoluteUri.Substring(63,53)+".ism/manifest(format=m3u8-aapl,filter=dvr2m)"
+                                                +"'}";
                     
                     //log.Info("encoder: "+p.Asset.GetHlsUri().AbsoluteUri.Substring(101,2));
                     //log.Info("code: "+p.Asset.GetHlsUri().AbsoluteUri.Substring(63,53));
-                    
-                    channelsStarted.Add("{ 'ChannelName':'"+   p.Channel.Name
-                                                +"','ChannelState':'"+ p.Channel.State.ToString()
-                                                   
-                        //https://e01pro.akamaized.net/4fe76e8c-58f6-45b5-a0b6-6f8782c9639f/C03WBK20190824S1.ism/manifest(format=m3u8-aapl,filter=dvr2m)
-                        //http://lima2019wmsprodmediaserv-brso.streaming.media.azure.net/148afd3f-60b4-4fba-851c-f4f82c0ad395/C05SWM20190825S1.ism/manifest(format=m3u8-aapl)                      
-            
-                    //  code        p.Asset.GetHlsUri().AbsoluteUri.Substring(63,53)
-                    //  encoder     Int32.Parse(p.Asset.GetHlsUri().AbsoluteUri.Substring(101,2)  
-                                               
-                                               
-                                                +"','Locators':'"+"https://e0"+((Convert.ToInt32(p.Asset.GetHlsUri().AbsoluteUri.Substring(101,2))%4)+1)+"prod-lima2019wmsprodmediaserv-brso.streaming.media.azure.net/"+p.Asset.GetHlsUri().AbsoluteUri.Substring(63,p.Asset.GetHlsUri().AbsoluteUri.LastIndexOf(".")-63)+".ism/manifest(format=m3u8-aapl,filter=dvr2m)"
-                                               //  +"','Locators':'"+"https://e04prod-lima2019wmsprodmediaserv-brso.streaming.media.azure.net/"+p.Asset.GetHlsUri().AbsoluteUri.Substring(63,53)+".ism/manifest(format=m3u8-aapl,filter=dvr2m)"
-                                                
-                                                
-
-                                                
-                                                +"'}");
+                    if(p.Asset.GetHlsUri().AbsoluteUri.Substring(116,1).Equals("."))
+                    channelsStarted.Add(valorChannel);
+                    else
+                    channelsStartedL.Add(valorChannel);
                                                 
             }
                                                 
@@ -95,6 +87,7 @@ namespace media_functions_for_logic_app
                 
        
                 channelStatus="["+String.Join(", ", channelsStarted.ToArray())+"]";
+                channelStatusL="["+String.Join(", ", channelsStartedL.ToArray())+"]";
                 //log.Info("Channels: "+channelStatus);
                 
             }
@@ -108,7 +101,8 @@ namespace media_functions_for_logic_app
             return req.CreateResponse(HttpStatusCode.OK, new
             {
                 success = true,
-                channels= JsonConvert.DeserializeObject( channelStatus)
+                channels= JsonConvert.DeserializeObject( channelStatusL),
+                channelsRecord= JsonConvert.DeserializeObject( channelStatus)
                 
             });
         }
