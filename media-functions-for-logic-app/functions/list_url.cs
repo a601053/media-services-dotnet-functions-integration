@@ -70,7 +70,9 @@ namespace media_functions_for_logic_app
                   
                     var valorChannel="{ 'ChannelName':'"+   p.Channel.Name
                                                 +"','ChannelState':'"+ p.Channel.State.ToString()
-                                                +"','Locators':'"+"https://e0"+((Convert.ToInt32(p.Asset.GetHlsUri().AbsoluteUri.Substring(101,2))%4)+1)+"prod-lima2019wmsprodmediaserv-brso.streaming.media.azure.net/"+p.Asset.GetHlsUri().AbsoluteUri.Substring(63,p.Asset.GetHlsUri().AbsoluteUri.LastIndexOf(".")-63)+".ism/manifest(format=m3u8-aapl,filter=dvr2m)"
+                                                +"','Locators':'"+"https://e0"+((Convert.ToInt32(p.Asset.GetHlsUri().AbsoluteUri.Substring(101,2))%4)+1)+"pro.akamaized.net/"+p.Asset.GetHlsUri().AbsoluteUri.Substring(63,p.Asset.GetHlsUri().AbsoluteUri.LastIndexOf(".")-63)+".ism/manifest(format=m3u8-aapl,filter=dvr2m)"
+                                               
+                                                //+"','Locators':'"+"https://e0"+((Convert.ToInt32(p.Asset.GetHlsUri().AbsoluteUri.Substring(101,2))%4)+1)+"prod-lima2019wmsprodmediaserv-brso.streaming.media.azure.net/"+p.Asset.GetHlsUri().AbsoluteUri.Substring(63,p.Asset.GetHlsUri().AbsoluteUri.LastIndexOf(".")-63)+".ism/manifest(format=m3u8-aapl,filter=dvr2m)"
                                                //  +"','Locators':'"+"https://e04prod-lima2019wmsprodmediaserv-brso.streaming.media.azure.net/"+p.Asset.GetHlsUri().AbsoluteUri.Substring(63,53)+".ism/manifest(format=m3u8-aapl,filter=dvr2m)"
                                                 +"'}";
                     
